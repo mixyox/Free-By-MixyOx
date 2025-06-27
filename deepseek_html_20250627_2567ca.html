@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free By Mixy - Premium Apps</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff2d75;
+            --dark: #121826;
+            --light: #f8f9ff;
+            --card-bg: rgba(26, 32, 49, 0.8);
+            --glow: 0 0 15px rgba(106, 17, 203, 0.7);
+            --water-blue: #4da6ff;
+            --water-light: #b3e0ff;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark), #1a2038);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            padding: 20px;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { 
+                transform: translateY(0) translateX(0); 
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-100vh) translateX(20px); 
+                opacity: 0.7;
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ff2d75, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            text-shadow: var(--glow);
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+        }
+
+        @media (max-width: 768px) {
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .apps-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+        }
+
+        .app-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(106, 17, 203, 0.3);
+            animation: cardAppear 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(106, 17, 203, 0.4), var(--glow);
+            border-color: rgba(106, 17, 203, 0.6);
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff2d75, #6a11cb, #2575fc, #6a11cb);
+            z-index: -1;
+            border-radius: 17px;
+            animation: borderGlow 3s infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .app-icon {
+            height: 70px;
+            width: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            margin: 20px auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-name {
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0 10px;
+            margin-bottom: 15px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Water-like download button */
+        .download-btn {
+            display: block;
+            width: 85%;
+            margin: 0 auto 20px;
+            padding: 10px;
+            background: rgba(77, 166, 255, 0.15);
+            color: white;
+            text-align: center;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 10px rgba(77, 166, 255, 0.3),
+                inset 0 0 10px rgba(179, 224, 255, 0.3);
+            border: 1px solid rgba(179, 224, 255, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            z-index: 1;
+            font-size: 0.9rem;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 20px rgba(77, 166, 255, 0.5),
+                inset 0 0 15px rgba(179, 224, 255, 0.5);
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(179, 224, 255, 0.3),
+                transparent
+            );
+            transition: all 0.7s ease;
+            z-index: -1;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .water-reflection {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: rgba(179, 224, 255, 0.2);
+            border-radius: 50%;
+            filter: blur(5px);
+            animation: waterReflect 3s infinite;
+        }
+
+        @keyframes waterReflect {
+            0% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(5px) scale(1.05); opacity: 0.5; }
+            100% { transform: translateY(0) scale(1); opacity: 0.3; }
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .verification-modal {
+            background: linear-gradient(145deg, #1a2239, #151b2d);
+            width: 90%;
+            max-width: 380px; /* Reduced from 500px */
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 1px solid rgba(106, 17, 203, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .verification-modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 15px; /* Reduced padding */
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-size: 1.4rem; /* Reduced font size */
+            letter-spacing: 1px;
+        }
+
+        .modal-content {
+            padding: 20px; /* Reduced padding */
+        }
+
+        .modal-text {
+            text-align: center;
+            margin-bottom: 15px; /* Reduced margin */
+            line-height: 1.5;
+            font-size: 0.95rem; /* Reduced font size */
+        }
+
+        .verification-step {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px; /* Reduced padding */
+            border-radius: 10px;
+            margin-bottom: 10px; /* Reduced margin */
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .verification-step:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(106, 17, 203, 0.3);
+        }
+
+        .step-icon {
+            width: 40px; /* Reduced size */
+            height: 40px; /* Reduced size */
+            background: rgba(106, 17, 203, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem; /* Reduced font size */
+            margin-right: 10px; /* Reduced margin */
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-content h3 {
+            margin-bottom: 5px;
+            font-size: 1rem; /* Reduced font size */
+        }
+
+        .social-btn {
+            display: inline-block;
+            padding: 6px 12px; /* Reduced padding */
+            background: rgba(77, 166, 255, 0.2);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 5px; /* Reduced margin */
+            transition: all 0.3s ease;
+            border: 1px solid rgba(179, 224, 255, 0.3);
+            cursor: pointer;
+            text-align: center;
+            min-width: 110px; /* Reduced width */
+            position: relative;
+            overflow: hidden;
+            font-size: 0.85rem; /* Reduced font size */
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.7s ease;
+        }
+
+        .social-btn:hover::before {
+            left: 100%;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(77, 166, 255, 0.2);
+        }
+
+        .telegram-btn { background: rgba(0, 136, 204, 0.2); }
+        .telegram-btn:hover { background: rgba(0, 136, 204, 0.3); }
+        
+        .instagram-btn { background: rgba(225, 48, 108, 0.2); }
+        .instagram-btn:hover { background: rgba(225, 48, 108, 0.3); }
+        
+        .youtube-btn { background: rgba(255, 0, 0, 0.2); }
+        .youtube-btn:hover { background: rgba(255, 0, 0, 0.3); }
+
+        .verified-check {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 1rem;
+            color: #00ff00;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .verified .verified-check {
+            opacity: 1;
+        }
+
+        .verify-btn {
+            display: block;
+            width: 100%;
+            padding: 10px; /* Reduced padding */
+            background: linear-gradient(to right, #ff2d75, #fd558f);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95rem; /* Reduced font size */
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px; /* Reduced margin */
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            pointer-events: none;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(255, 45, 117, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verify-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.7s ease;
+        }
+
+        .verify-btn:hover::before {
+            left: 100%;
+        }
+
+        .verify-btn.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .verify-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 45, 117, 0.5);
+        }
+
+        .disclaimer {
+            max-width: 1000px;
+            margin: 40px auto 20px;
+            padding: 25px;
+            background: rgba(255, 45, 117, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 45, 117, 0.3);
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .disclaimer h3 {
+            color: #ff2d75;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 20px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .verification-step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-icon {
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+            
+            .app-card {
+                max-width: 100%;
+            }
+            
+            .app-icon {
+                height: 60px;
+                width: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .app-name {
+                font-size: 1rem;
+                height: 40px;
+            }
+            
+            .download-btn {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+
+            .verification-modal {
+                max-width: 95%;
+                max-width: 340px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .modal-content {
+                padding: 15px;
+            }
+            
+            .step-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+            
+            .step-content h3 {
+                font-size: 0.95rem;
+            }
+            
+            .social-btn {
+                min-width: 100px;
+                padding: 5px 10px;
+                font-size: 0.8rem;
+            }
+            
+            .verify-btn {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script type='text/javascript' src='//pl26916575.profitableratecpm.com/c5/4b/0f/c54b0f8b88fb224a47b183ad88d08d9c.js'></script>
+    <!-- Animated background particles -->
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <h1 class="logo">Free By Mixy</h1>
+        <p class="tagline">Premium cracked apps for free. Download the best tools without any cost!</p>
+    </header>
+
+    <div class="apps-grid" id="appsGrid">
+        <!-- Apps will be populated by JavaScript -->
+    </div>
+
+    <div class="disclaimer">
+        <h3><i class="fas fa-exclamation-triangle"></i> IMPORTANT DISCLAIMER 🚨</h3>
+        <p>This All application is intended solely for fan purposes and entertainment. Any misuse or illegal activity conducted through this app is strictly prohibited. If any individual engages in unlawful actions and faces legal consequences from the Indian Police Department or any other authority, we, the creators/developers, shall not be held responsible or liable for such actions. Use the app responsibly and at your own risk..</p>
+    </div>
+
+    <footer>
+        <p>© 2025 Free By Mixy. All rights reserved. | For educational purposes only</p>
+    </footer>
+
+    <!-- Verification Modal -->
+    <div class="modal-overlay" id="verificationModal">
+        <div class="verification-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> Verification Required</h2>
+            </div>
+            <div class="modal-content">
+                <p class="modal-text">To download this app, please follow us on our social platforms. This helps us continue providing free apps!</p>
+                
+                <div class="verification-step" id="telegramStep">
+                    <div class="step-icon" style="color: #0088cc;">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Join Our Telegram</h3>
+                        <button class="social-btn telegram-btn" data-platform="telegram">
+                            Join Telegram
+                            <span class="verified-check"><i class="fas fa-check-circle"></i></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="verification-step" id="instagramStep">
+                    <div class="step-icon" style="color: #e1306c;">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Follow on Instagram</h3>
+                        <button class="social-btn instagram-btn" data-platform="instagram">
+                            Follow Instagram
+                            <span class="verified-check"><i class="fas fa-check-circle"></i></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="verification-step" id="youtubeStep">
+                    <div class="step-icon" style="color: #ff0000;">
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                    <div class="step-content">
+                        <h3>Subscribe YouTube</h3>
+                        <button class="social-btn youtube-btn" data-platform="youtube">
+                            Subscribe YouTube
+                            <span class="verified-check"><i class="fas fa-check-circle"></i></span>
+                        </button>
+                    </div>
+                </div>
+                
+                <button class="verify-btn" id="verifyBtn">VERIFY & DOWNLOAD</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // App data
+        const apps = [
+            { name: "Alfa Bomber", icon: "fa-bomb", link: "https://www.mediafire.com/file/4la8bc4berdoi1b/Alfa_Bomber_Cracked_V1_%255BVip%255D.apk/file" },
+            { name: "B Tool Bomber", icon: "fa-tools", link: "https://www.mediafire.com/file/eaor57dmwwjasmv/B_TOOLS_BOMBER_CRACKED_%255BPRO%255D.apk/file" },
+            { name: "Codered Bomber", icon: "fa-bug", link: "https://www.mediafire.com/file/d4pjcvx4e4e2gm8/CodeRed_Bomber_V2_%255BPro%255D.apk/file" },
+            { name: "Combet-X Bomber", icon: "fa-fighter-jet", link: "https://www.mediafire.com/file/c0c76y0hgcg1iy6/Combat-X_Bomber_%255BPro%255D.apk/file" },
+            { name: "Flame-X Bomber", icon: "fa-fire", link: "https://www.mediafire.com/file/61xlxsxqedfm3cy/Flame-X_Bomber_%255BPro%255D.apk/file" },
+            { name: "Light-X Bomber", icon: "fa-lightbulb", link: "https://www.mediafire.com/file/d2az31ei96az2uj/LightX_Bomber.apk/file" },
+            { name: "Predator Bomber", icon: "fa-paw", link: "https://www.mediafire.com/file/g4p80ff971proke/Predator-X_007_Bomber_%255BPro%255D.apk/file" },
+            { name: "Predator-X", icon: "fa-crosshairs", link: "https://www.mediafire.com/file/zykwcr9mgwj34za/Predator-X_%255BPro%255D.apk/file" },
+            { name: "Rip Bomber", icon: "fa-skull", link: "https://www.mediafire.com/file/r5uvstdqzxyggk1/RIP_BOMB_CRACKED_%255BVip%255D.apk/file" },
+            { name: "Sms Bomber", icon: "fa-sms", link: "https://www.mediafire.com/file/opqs0xeriqi2jq5/SMM_Bomber_2.2_Cracked_%255BVIP%255D%255B2024%255D.apk/file" },
+            { name: "Stunet Bomber", icon: "fa-network-wired", link: "https://www.mediafire.com/file/ene37q3jpfkh5aa/StuxNet-X_Bomber_%255BPro%255D.apk/file" },
+            { name: "Sukuna Bomber", icon: "fa-hand-spock", link: "https://www.mediafire.com/file/ibilp2mp7driwrx/Sukuna_Bomber_Cracked_%255BVip%255D.apk/file" },
+            { name: "T-Rex Bomber", icon: "fa-dinosaur", link: "https://www.mediafire.com/file/xtmf9w968vnzkf8/T-Rex_Bomber_%255BPro%255D.apk/file" },
+            { name: "Vip Alfa Bomber", icon: "fa-crown", link: "https://www.mediafire.com/file/3hwdeu17xlp900m/Vip_Alfa_Bomber_Cracked_V2_%255B2.6%255D_%255BPro%255D.apk/file" },
+            { name: "Virtual Bomber", icon: "fa-vr-cardboard", link: "https://www.mediafire.com/file/s2ymrrf2k8pvb2q/VIRTUAL_Bomber_Cracked_%255B1.7%255D_%255BVip%255D.apk/file" },
+            { name: "Weapon-X Bomber", icon: "fa-gun", link: "https://www.mediafire.com/file/2xrhtx6p69m7b0y/WeaponX_Bomber_%255BPro%255D.apk/file" }
+        ];
+
+        // DOM Elements
+        const appsGrid = document.getElementById('appsGrid');
+        const verificationModal = document.getElementById('verificationModal');
+        const verifyBtn = document.getElementById('verifyBtn');
+        
+        // State
+        let currentDownloadLink = '';
+        let isVerified = false; // Always start unverified
+        const completedSteps = {
+            telegram: false,
+            instagram: false,
+            youtube: false
+        };
+
+        // Create app cards
+        apps.forEach((app, index) => {
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.style.animationDelay = `${index * 0.05}s`;
+            
+            card.innerHTML = `
+                <div class="app-icon">
+                    <i class="fas ${app.icon}"></i>
+                </div>
+                <div class="app-name">${app.name}</div>
+                <button class="download-btn" data-link="${app.link}">
+                    <i class="fas fa-download"></i> DOWNLOAD
+                    <div class="water-reflection"></div>
+                </button>
+            `;
+            
+            appsGrid.appendChild(card);
+        });
+
+        // Add event listeners to download buttons
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                
+                if (isVerified) {
+                    // Direct download if verified
+                    window.open(link, '_blank');
+                } else {
+                    // Show verification modal
+                    currentDownloadLink = link;
+                    verificationModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Add event listeners to social buttons
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const platform = this.getAttribute('data-platform');
+                let url = '';
+                
+                switch(platform) {
+                    case 'telegram':
+                        url = 'https://t.me/+WQE6B-GAq_1mMzc1';
+                        break;
+                    case 'instagram':
+                        url = 'https://www.instagram.com/mixy_ox?igsh=MXNmbGo5anpjbWY4aQ==';
+                        break;
+                    case 'youtube':
+                        url = 'https://youtube.com/@mixyox-1?si=mveL0YZbEPgcAs6H';
+                        break;
+                }
+                
+                // Open the link in new tab
+                window.open(url, '_blank');
+                
+                // Mark step as completed
+                completedSteps[platform] = true;
+                
+                // Add verified class to the step
+                const stepElement = document.getElementById(`${platform}Step`);
+                stepElement.classList.add('verified');
+                
+                // Disable the button
+                this.style.opacity = '0.7';
+                this.style.cursor = 'default';
+                this.style.pointerEvents = 'none';
+                
+                // Check if all verification steps are completed
+                checkVerificationStatus();
+            });
+        });
+
+        // Verify button click handler
+        verifyBtn.addEventListener('click', function() {
+            isVerified = true;
+            verificationModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            if (currentDownloadLink) {
+                window.open(currentDownloadLink, '_blank');
+            }
+        });
+
+        // Close modal when clicking outside
+        verificationModal.addEventListener('click', function(e) {
+            if (e.target === verificationModal) {
+                verificationModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Check verification status
+        function checkVerificationStatus() {
+            const allCompleted = Object.values(completedSteps).every(status => status);
+            verifyBtn.classList.toggle('active', allCompleted);
+        }
+
+        // Create animated background particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            const colors = ['#6a11cb', '#2575fc', '#ff2d75', '#00d4ff', '#ff6b6b'];
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random properties
+                const size = Math.random() * 20 + 5;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 20 + 15;
+                const delay = Math.random() * 5;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.background = `radial-gradient(circle, ${color}, transparent)`;
+                particle.style.boxShadow = `0 0 15px ${color}`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+        });
+    </script>
+</body>
+	<script type="text/javascript">
+	atOptions = {
+		'key' : '35031c1d1e3ed85f9e20f1edbceb22ca',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/35031c1d1e3ed85f9e20f1edbceb22ca/invoke.js"></script>
+</html>
